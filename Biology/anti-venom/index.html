@@ -1,613 +1,666 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>বিষের প্রতিষেধক: অ্যান্টিভেনম কীভাবে তৈরি হয়</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বিষ থেকে ওষুধ — অ্যান্টিভেনম যেভাবে তৈরি হয়</title>
+<style>
+  :root{
+    --bg: #0b1210;
+    --bg-alt: #101b18;
+    --card: #12211d;
+    --line: #234036;
+    --venom: #7cf29c;
+    --venom-dim: #4d8f66;
+    --anti: #ffb454;
+    --text: #dfeee6;
+    --muted: #8fa89c;
+    --serif: "Georgia", "Noto Serif Bengali", serif;
+    --sans: "Segoe UI", "Noto Sans Bengali", sans-serif;
+  }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1a2847 100%);
-            color: #e0e7ff;
-            line-height: 1.8;
-            overflow-x: hidden;
-        }
+  *{ margin:0; padding:0; box-sizing:border-box; }
 
-        /* Header & Navigation */
-        header {
-            background: rgba(15, 23, 42, 0.95);
-            padding: 2rem;
-            border-bottom: 2px solid #7c3aed;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
+  html{ scroll-behavior: smooth; }
 
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.75;
+  }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #7c3aed, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+  ::selection{ background: var(--venom); color: #06120b; }
 
-        nav ul {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
+  img{ max-width:100%; display:block; }
 
-        nav a {
-            color: #c4b5fd;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
+  /* Fallback for missing local images: quiet placeholder, not a broken-icon eyesore */
+  .fig img{
+    background: linear-gradient(135deg, #16241f, #0e1815);
+    min-height: 180px;
+  }
+  .fig img::before{ content: ''; }
 
-        nav a:hover {
-            color: #7c3aed;
-        }
+  a{ color: var(--anti); }
 
-        /* Hero Section */
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 6rem 2rem;
-            text-align: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+  /* ---------- Progress rail ---------- */
+  .rail{
+    position: fixed;
+    top:0; left:0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--venom), var(--anti));
+    z-index: 500;
+    transition: width .1s linear;
+  }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            background: linear-gradient(135deg, #fbbf24, #f97316, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
+  header{
+    position: sticky; top:0; z-index: 400;
+    background: rgba(11,18,16,.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav{
+    max-width: 1080px; margin:0 auto;
+    padding: .9rem 1.5rem;
+    display:flex; align-items:center; justify-content: space-between;
+    gap: 1rem; flex-wrap: wrap;
+  }
+  .brand{
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    display:flex; align-items:center; gap:.5rem;
+    color: var(--text);
+  }
+  .brand .dot{ width:8px; height:8px; border-radius:50%; background: var(--venom); box-shadow: 0 0 12px var(--venom);}
+  nav ul{ display:flex; gap: 1.4rem; list-style:none; font-size: .9rem; }
+  nav a{ color: var(--muted); text-decoration:none; transition:color .2s; }
+  nav a:hover{ color: var(--venom); }
 
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: #a5b4fc;
-            margin-bottom: 3rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width: 1080px; margin: 0 auto;
+    padding: 5rem 1.5rem 3rem;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero h1{
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4.5vw, 3.1rem);
+    line-height: 1.25;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .hero h1 em{
+    font-style: normal;
+    color: var(--venom);
+  }
+  .hero p{
+    margin-top: 1.2rem;
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 46ch;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size: .78rem;
+    letter-spacing: .12em;
+    color: var(--venom-dim);
+    border: 1px solid var(--venom-dim);
+    padding: .3rem .7rem;
+    border-radius: 100px;
+    margin-bottom: 1.2rem;
+  }
+  .hero-fig{
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    aspect-ratio: 4/5;
+  }
+  .hero-fig img{ width:100%; height:100%; object-fit: cover; }
+  .fig-cap{
+    font-size: .8rem;
+    color: var(--muted);
+    margin-top: .6rem;
+    text-align: center;
+  }
 
-        .snake-visual {
-            margin: 3rem 0;
-            perspective: 1000px;
-        }
+  /* ---------- Section shell ---------- */
+  section{
+    max-width: 1080px; margin: 0 auto;
+    padding: 5rem 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  section:last-of-type{ border-bottom:none; }
 
-        .snake-icon {
-            font-size: 8rem;
-            display: inline-block;
-            animation: float 4s ease-in-out infinite;
-        }
+  .section-head{
+    display:flex; align-items:baseline; gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .section-num{
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--venom-dim);
+  }
+  h2{
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    color: var(--text);
+  }
+  .lede{
+    color: var(--muted);
+    max-width: 65ch;
+    margin-bottom: 2.5rem;
+    font-size: 1.02rem;
+  }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
+  /* ---------- Process: image-led steps ---------- */
+  .steps{
+    display:flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+  .step{
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .step:nth-child(even){
+    grid-template-columns: 1fr 220px;
+  }
+  .step:nth-child(even) .fig{ order: 2; }
+  .step:nth-child(even) .step-text{ order: 1; }
 
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #7c3aed, #ec4899);
-            color: white;
-            padding: 1.2rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-        }
+  .fig{
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card);
+  }
+  .fig img{ width:100%; aspect-ratio: 1/1; object-fit: cover; }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.5);
-        }
+  .step-text .tag{
+    font-size: .78rem;
+    color: var(--venom);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: .4rem;
+    display:block;
+  }
+  .step-text h3{
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    margin-bottom: .6rem;
+    color: var(--text);
+  }
+  .step-text p{
+    color: var(--muted);
+    font-size: .98rem;
+  }
 
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+  @media (max-width: 680px){
+    .step, .step:nth-child(even){
+      grid-template-columns: 1fr;
+    }
+    .step .fig, .step:nth-child(even) .fig{ order: 1; }
+    .step .step-text, .step:nth-child(even) .step-text{ order: 2; }
+    .fig img{ aspect-ratio: 16/9; }
+  }
 
-        section {
-            padding: 4rem 0;
-            border-bottom: 1px solid rgba(124, 58, 237, 0.2);
-        }
+  /* ---------- Interactive antibody diagram ---------- */
+  .lab{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 2.5rem;
+  }
+  .lab-controls{
+    display:flex; gap: .6rem; flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .lab-btn{
+    background: transparent;
+    border: 1px solid var(--venom-dim);
+    color: var(--venom);
+    padding: .55rem 1.1rem;
+    border-radius: 100px;
+    font-size: .88rem;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: var(--sans);
+  }
+  .lab-btn:hover{ background: rgba(124,242,156,.08); }
+  .lab-btn.active{
+    background: var(--venom);
+    color: #06120b;
+    font-weight: 600;
+    border-color: var(--venom);
+  }
 
-        section:last-child {
-            border-bottom: none;
-        }
+  .stage{
+    position: relative;
+    min-height: 260px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius: 10px;
+    background: radial-gradient(ellipse at center, #14261f 0%, #0d1613 100%);
+    overflow:hidden;
+  }
+  .molecule{
+    position:absolute;
+    border-radius: 50%;
+    transition: all .6s cubic-bezier(.4,0,.2,1);
+  }
+  .lab-caption{
+    margin-top: 1.5rem;
+    color: var(--muted);
+    font-size: .95rem;
+    min-height: 3em;
+  }
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #fbbf24;
-            text-align: center;
-        }
+  /* ---------- Timeline ---------- */
+  .tl{
+    display:flex; flex-direction:column;
+  }
+  .tl-row{
+    display:grid;
+    grid-template-columns: 110px 20px 1fr;
+    gap: 0 1.2rem;
+  }
+  .tl-when{
+    font-family: var(--serif);
+    font-size: .92rem;
+    color: var(--venom-dim);
+    padding-top: .1rem;
+    text-align: right;
+  }
+  .tl-line{
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .tl-dot{
+    width:10px; height:10px; border-radius:50%;
+    background: var(--venom);
+    margin-top: .3rem;
+    flex-shrink:0;
+    box-shadow: 0 0 0 4px rgba(124,242,156,.12);
+  }
+  .tl-stem{
+    width:1px; flex:1;
+    background: var(--line);
+  }
+  .tl-row:last-child .tl-stem{ display:none; }
+  .tl-body{ padding-bottom: 2.4rem; }
+  .tl-body h4{
+    font-size: 1.02rem;
+    margin-bottom: .35rem;
+    color: var(--text);
+  }
+  .tl-body p{
+    color: var(--muted);
+    font-size: .92rem;
+  }
 
-        /* Process Steps */
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
+  @media (max-width: 560px){
+    .tl-row{ grid-template-columns: 20px 1fr; }
+    .tl-when{ display:none; }
+  }
 
-        .step-card {
-            background: rgba(124, 58, 237, 0.1);
-            border: 2px solid #7c3aed;
-            padding: 2rem;
-            border-radius: 12px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
+  /* ---------- Gallery / comparison ---------- */
+  .compare{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .compare .fig img{ aspect-ratio: 4/3; object-fit: cover; }
+  .compare-cap{
+    padding: 1rem;
+  }
+  .compare-cap h4{
+    font-size: .95rem;
+    color: var(--anti);
+    margin-bottom: .3rem;
+  }
+  .compare-cap p{
+    font-size: .88rem;
+    color: var(--muted);
+  }
 
-        .step-card:hover {
-            background: rgba(124, 58, 237, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
-        }
+  @media (max-width: 640px){
+    .compare{ grid-template-columns: 1fr; }
+  }
 
-        .step-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #7c3aed, #ec4899);
-        }
+  /* ---------- Future grid ---------- */
+  .future-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+  .future-card{
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.5rem;
+    background: var(--bg-alt);
+    transition: border-color .2s;
+  }
+  .future-card:hover{ border-color: var(--venom-dim); }
+  .future-card .icon{ font-size: 1.6rem; margin-bottom: .8rem; display:block; }
+  .future-card h4{ font-size: 1rem; margin-bottom: .5rem; color: var(--text); }
+  .future-card p{ font-size: .88rem; color: var(--muted); }
 
-        .step-number {
-            display: inline-block;
-            background: linear-gradient(135deg, #7c3aed, #ec4899);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
+  footer{
+    max-width: 1080px; margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+    color: var(--muted);
+    font-size: .88rem;
+    text-align: center;
+  }
+  footer a{ color: var(--venom-dim); }
 
-        .step-card h3 {
-            color: #fbbf24;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .step-card p {
-            color: #c4b5fd;
-            font-size: 0.95rem;
-        }
-
-        /* Animation Timeline */
-        .timeline {
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, #7c3aed, #ec4899);
-        }
-
-        .timeline-item {
-            margin-bottom: 3rem;
-            width: 48%;
-        }
-
-        .timeline-item:nth-child(odd) {
-            margin-left: 0;
-            text-align: right;
-            padding-right: 5%;
-        }
-
-        .timeline-item:nth-child(even) {
-            margin-left: 52%;
-            text-align: left;
-            padding-left: 5%;
-        }
-
-        .timeline-item-content {
-            background: rgba(124, 58, 237, 0.1);
-            border: 2px solid #7c3aed;
-            padding: 1.5rem;
-            border-radius: 8px;
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: #ec4899;
-            border: 4px solid #0f172a;
-            border-radius: 50%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .timeline-item:nth-child(odd)::after {
-            top: 2rem;
-        }
-
-        .timeline-item:nth-child(even)::after {
-            top: 2rem;
-        }
-
-        /* Interactive Section */
-        .interactive-section {
-            background: rgba(124, 58, 237, 0.15);
-            padding: 3rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            border: 2px solid #7c3aed;
-        }
-
-        .info-box {
-            background: rgba(236, 72, 153, 0.1);
-            border-left: 4px solid #ec4899;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 4px;
-            font-size: 0.95rem;
-        }
-
-        .highlight {
-            color: #fbbf24;
-            font-weight: 600;
-        }
-
-        /* Responsive Timeline */
-        @media (max-width: 768px) {
-            .timeline::before {
-                left: 20px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                margin-left: 0 !important;
-                text-align: left !important;
-                padding-left: 60px !important;
-                padding-right: 0 !important;
-            }
-
-            .timeline-item::after {
-                left: 10px;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            nav ul {
-                gap: 1rem;
-            }
-
-            h2 {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(15, 23, 42, 0.95);
-            padding: 2rem;
-            text-align: center;
-            border-top: 2px solid #7c3aed;
-            color: #a5b4fc;
-            margin-top: 4rem;
-        }
-
-        footer p {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-link {
-            color: #7c3aed;
-            text-decoration: none;
-        }
-
-        .footer-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Accent Animation */
-        @keyframes pulse-glow {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.2); }
-        }
-
-        .pulse-glow {
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
-    </style>
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">⚗️ অ্যান্টিভেনম</div>
-            <ul>
-                <li><a href="#process">প্রক্রিয়া</a></li>
-                <li><a href="#timeline">ধাপ</a></li>
-                <li><a href="#science">বিজ্ঞান</a></li>
-                <li><a href="#modern">আধুনিকতা</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section class="hero">
-        <h1>বিষের প্রতিষেধক কীভাবে কাজ করে</h1>
-        <p class="hero-subtitle">সাপের বিষ থেকে জীবন রক্ষাকারী ওষুধ তৈরির বৈজ্ঞানিক যাত্রা</p>
-        <div class="snake-visual">
-            <div class="snake-icon pulse-glow">🐍</div>
-        </div>
-        <a href="#process" class="cta-button">আবিষ্কার করুন</a>
-    </section>
+<div class="rail" id="rail"></div>
 
-    <div class="container">
-        <section id="process">
-            <h2>অ্যান্টিভেনম উৎপাদন প্রক্রিয়া</h2>
-            <p style="text-align: center; color: #a5b4fc; margin-bottom: 2rem; font-size: 1.1rem;">
-                ছয়টি প্রধান ধাপের মাধ্যমে জীবন রক্ষাকারী ওষুধ তৈরি হয়
-            </p>
+<header>
+  <nav>
+    <div class="brand"><span class="dot"></span>বিষ থেকে ওষুধ</div>
+    <ul>
+      <li><a href="#extract">সংগ্রহ</a></li>
+      <li><a href="#immune">প্রক্রিয়া</a></li>
+      <li><a href="#antibody">বিজ্ঞান</a></li>
+      <li><a href="#timeline">সময়রেখা</a></li>
+      <li><a href="#future">ভবিষ্যৎ</a></li>
+    </ul>
+  </nav>
+</header>
 
-            <div class="process-grid">
-                <div class="step-card">
-                    <div class="step-number">১</div>
-                    <h3>বিষ সংগ্রহ</h3>
-                    <p>বিশেষভাবে প্রশিক্ষিত বিষ বিজ্ঞানীরা সাপ থেকে নিরাপদে বিষ সংগ্রহ করেন। এই প্রক্রিয়ায় অত্যন্ত সতর্কতা এবং দক্ষতার প্রয়োজন হয়।</p>
-                </div>
+<div class="hero">
+  <div>
+    <span class="eyebrow">জীববিজ্ঞান · ইমিউনোলজি</span>
+    <h1>একটি প্রাণঘাতী বিষ কীভাবে <em>জীবন রক্ষাকারী ওষুধে</em> রূপ নেয়</h1>
+    <p>প্রতি বছর হাজারো মানুষ সাপের কামড়ে আক্রান্ত হন। কিন্তু সেই একই বিষ থেকেই তৈরি হয় তাদের বাঁচানোর ওষুধ — অ্যান্টিভেনম। নিচে ধাপে ধাপে দেখুন এই প্রক্রিয়াটি।</p>
+  </div>
+  <div>
+    <div class="fig hero-fig">
+      <img src="img/hero-snake.jpg" alt="বিষধর সাপ">
+    </div>
+    <p class="fig-cap">বিষ সংগ্রহের জন্য ব্যবহৃত একটি বিষধর সাপ</p>
+  </div>
+</div>
 
-                <div class="step-card">
-                    <div class="step-number">২</div>
-                    <h3>বিষ প্রস্তুতি</h3>
-                    <p>সংগৃহীত বিষ পরিষ্কার করা হয় এবং প্রয়োজন অনুযায়ী দুর্বল করা হয়। এটি নিরাপদ ইনজেকশনের জন্য প্রস্তুত করা হয়।</p>
-                </div>
+<section id="extract">
+  <div class="section-head">
+    <span class="section-num">০১</span>
+    <h2>বিষ সংগ্রহ থেকে সিরাম পর্যন্ত</h2>
+  </div>
+  <p class="lede">অ্যান্টিভেনম তৈরির প্রক্রিয়া শুরু হয় সরাসরি সাপ থেকে, এবং শেষ হয় একটি প্রাণীর রক্তে। মাঝের প্রতিটি ধাপ নির্ভুলভাবে নিয়ন্ত্রিত।</p>
 
-                <div class="step-card">
-                    <div class="step-number">৩</div>
-                    <h3>প্রাণীতে ইনজেকশন</h3>
-                    <p>তৈরিকৃত বিষ ঘোড়া বা ভেড়ার শরীরে ধীরে ধীরে বাড়তি পরিমাণে দেওয়া হয়। এর ফলে প্রাণীর রক্তে বিষের বিরুদ্ধে অ্যান্টিবডি তৈরি হয়।</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">৪</div>
-                    <h3>অ্যান্টিবডি উৎপাদন</h3>
-                    <p>প্রাণীর রোগ প্রতিরোধ ব্যবস্থা বিষের বিরুদ্ধে শক্তিশালী অ্যান্টিবডি প্রোটিন তৈরি করে। এই প্রক্রিয়া সাধারণত কয়েক সপ্তাহ সময় নেয়।</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">৫</div>
-                    <h3>রক্ত সংগ্রহ</h3>
-                    <p>প্রয়োজনীয় অ্যান্টিবডির মাত্রা অর্জনের পর প্রাণী থেকে রক্ত সংগ্রহ করা হয়। এই রক্তে বিষের বিরুদ্ধে প্রচুর অ্যান্টিবডি থাকে।</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-number">৬</div>
-                    <h3>সিরাম প্রক্রিয়াকরণ</h3>
-                    <p>রক্ত থেকে সিরাম আলাদা করা হয় এবং অ্যান্টিবডি নিষ্কাশন ও ঘনীকরণ করা হয়। এরপর তা রোগীর জন্য প্রস্তুত হয়।</p>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <strong class="highlight">💡 মূল নীতি:</strong> যখন বিষ ধীরে ধীরে শরীরে প্রবেশ করায়, তখন প্রাকৃতিক রোগ প্রতিরোধ ব্যবস্থা এর বিরুদ্ধে বিশেষ যোদ্ধা প্রোটিন (অ্যান্টিবডি) তৈরি করে।
-            </div>
-        </section>
-
-        <section id="timeline">
-            <h2>সময়সূচী: ধাপে ধাপে যাত্রা</h2>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-item-content">
-                        <h3 style="color: #fbbf24;">প্রথম দিন - বিষ সংগ্রহ</h3>
-                        <p>অভিজ্ঞ বিষজ্ঞ দল নিরাপদে সাপের বিষ সংগ্রহ করেন এবং বিশ্লেষণ করেন।</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-item-content">
-                        <h3 style="color: #fbbf24;">সপ্তাহ ১-২ - প্রাথমিক টিকা</h3>
-                        <p>প্রাণীকে প্রথম দুর্বল মাত্রার বিষ দেওয়া হয় যাতে তার শরীর রোগ প্রতিরোধ ক্ষমতা জাগ্রত হয়।</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-item-content">
-                        <h3 style="color: #fbbf24;">সপ্তাহ ৩-৮ - বুস্টার ডোজ</h3>
-                        <p>ধীরে ধীরে বিষের পরিমাণ বাড়ানো হয় যাতে আরও বেশি অ্যান্টিবডি তৈরি হয়।</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-item-content">
-                        <h3 style="color: #fbbf24;">সপ্তাহ ৮-১০ - শক্তি পরীক্ষা</h3>
-                        <p>রক্ত পরীক্ষা করে দেখা হয় যে অ্যান্টিবডির মাত্রা যথেষ্ট কিনা।</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-item-content">
-                        <h3 style="color: #fbbf24;">সপ্তাহ ১০ - রক্ত সংগ্রহ</h3>
-                        <p>প্রাণী থেকে বড় পরিমাণে রক্ত সংগ্রহ করা হয়।</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-item-content">
-                        <h3 style="color: #fbbf24;">সপ্তাহ ১১-১২ - চূড়ান্ত প্রক্রিয়াকরণ</h3>
-                        <p>অ্যান্টিবডি নিষ্কাশন, পরিশোধন এবং প্যাকেজিং সম্পন্ন হয়। এখন এটি চিকিৎসকের জন্য প্রস্তুত।</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="science">
-            <h2>বিজ্ঞানের পেছনের রহস্য</h2>
-            
-            <div class="interactive-section">
-                <h3 style="color: #fbbf24; margin-bottom: 1.5rem;">অ্যান্টিবডি কীভাবে কাজ করে?</h3>
-                
-                <p style="margin-bottom: 1.5rem;">
-                    সাপের বিষ মূলত প্রোটিন এবং এনজাইমের মিশ্রণ। যখন এই বিষ শরীরে প্রবেশ করে তখন:
-                </p>
-
-                <div class="info-box">
-                    <strong class="highlight">ধাপ ১:</strong> শরীরের রোগ প্রতিরোধ ব্যবস্থা বিষকে বিদেশী পদার্থ হিসেবে চিনে নেয়।
-                </div>
-
-                <div class="info-box">
-                    <strong class="highlight">ধাপ ২:</strong> বি-কোষ নামক বিশেষ কোষ বিষের বিরুদ্ধে অ্যান্টিবডি প্রোটিন তৈরি করতে থাকে।
-                </div>
-
-                <div class="info-box">
-                    <strong class="highlight">ধাপ ৩:</strong> এই অ্যান্টিবডিগুলো বিষের সাথে আবদ্ধ হয়ে তার ক্ষতিকর প্রভাব নিরপেক্ষ করে দেয়।
-                </div>
-
-                <div class="info-box">
-                    <strong class="highlight">ধাপ ৪:</strong> নিরপেক্ষীকৃত বিষ শরীরের বর্জ্য নিষ্কাশন ব্যবস্থা দ্বারা বের করে দেওয়া হয়।
-                </div>
-
-                <p style="margin-top: 2rem; color: #a5b4fc;">
-                    <strong class="highlight">কেন ঘোড়া বা ভেড়া?</strong> এই বড় প্রাণীগুলোর শরীর বেশি অ্যান্টিবডি তৈরি করতে পারে এবং তাদের সিরাম থেকে বেশি পরিমাণে জীবন রক্ষাকারী উপাদান পাওয়া যায়।
-                </p>
-            </div>
-        </section>
-
-        <section id="modern">
-            <h2>আধুনিক প্রযুক্তি ও ভবিষ্যৎ</h2>
-            
-            <div class="process-grid">
-                <div class="step-card">
-                    <h3>🧬 জিন প্রযুক্তি</h3>
-                    <p>বৈজ্ঞানিকরা এখন জিনগত পদ্ধতি ব্যবহার করে ল্যাবরেটরিতেই অ্যান্টিবডি তৈরি করছেন। এটি দ্রুত এবং নৈতিক উভয়ই।</p>
-                </div>
-
-                <div class="step-card">
-                    <h3>🔬 পুনর্সংযোজিত অ্যান্টিভেনম</h3>
-                    <p>ভবিষ্যতের ওষুধগুলো পশু প্রয়োজন ছাড়াই ব্যাকটেরিয়া বা ইস্ট ব্যবহার করে তৈরি হবে।</p>
-                </div>
-
-                <div class="step-card">
-                    <h3>⚡ দ্রুত উৎপাদন</h3>
-                    <p>নতুন পদ্ধতি দিয়ে অ্যান্টিভেনম কয়েক দিনের পরিবর্তে ঘন্টায় তৈরি করা সম্ভব হবে।</p>
-                </div>
-
-                <div class="step-card">
-                    <h3>🌍 সর্বজনীন অ্যান্টিভেনম</h3>
-                    <p>গবেষকরা এমন একটি অ্যান্টিভেনম তৈরি করছেন যা একাধিক সাপের বিষের বিরুদ্ধে কাজ করবে।</p>
-                </div>
-
-                <div class="step-card">
-                    <h3>💾 কৃত্রিম বুদ্ধিমত্তা</h3>
-                    <p>এআই বিষের গঠন বিশ্লেষণ করে আরও কার্যকর অ্যান্টিভেনম ডিজাইনে সাহায্য করছে।</p>
-                </div>
-
-                <div class="step-card">
-                    <h3>🏥 তাৎক্ষণিক চিকিৎসা</h3>
-                    <p>শীঘ্রই প্রত্যন্ত এলাকায়ও অ্যান্টিভেনম সরাসরি ড্রোন বা অ্যাপের মাধ্যমে পাওয়া যাবে।</p>
-                </div>
-            </div>
-
-            <div class="info-box" style="margin-top: 3rem;">
-                <strong class="highlight">🚀 ভবিষ্যতের স্বপ্ন:</strong> এমন একটি বিশ্ব যেখানে সাপের কামড় আর মৃত্যু নয়, বরং পুরোপুরি প্রতিরোধযোগ্য একটি ঘটনা হয়ে উঠবে।
-            </div>
-        </section>
+  <div class="steps">
+    <div class="step">
+      <div class="fig"><img src="img/step1-milking.jpg" alt="সাপ থেকে বিষ সংগ্রহ (মিল্কিং)"></div>
+      <div class="step-text">
+        <span class="tag">ধাপ ১</span>
+        <h3>বিষ সংগ্রহ (Milking)</h3>
+        <p>প্রশিক্ষিত বিষজ্ঞরা সাপকে একটি পাত্রের কাঁচের কিনারায় কামড় দিতে বাধ্য করেন, যাতে বিষ সরাসরি একটি সংগ্রহ পাত্রে জমা হয়। এটি সাপের জন্য ক্ষতিকর নয়।</p>
+      </div>
     </div>
 
-    <footer>
-        <p>🧪 <strong>বিজ্ঞান ও স্বাস্থ্য সম্পর্কে শিক্ষামূলক তথ্য</strong></p>
-        <p>এই পৃষ্ঠাটি অ্যান্টিভেনম উৎপাদনের বৈজ্ঞানিক প্রক্রিয়া সম্পর্কে সচেতনতা বৃদ্ধির জন্য তৈরি।</p>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">
-            যেকোনো প্রশ্ন বা পরামর্শের জন্য যোগাযোগ করুন | <a href="#" class="footer-link">শীর্ষে ফিরুন</a>
-        </p>
-    </footer>
+    <div class="step">
+      <div class="fig"><img src="img/step2-vial.jpg" alt="সংগৃহীত বিষ শুকিয়ে সংরক্ষণ"></div>
+      <div class="step-text">
+        <span class="tag">ধাপ ২</span>
+        <h3>শুকানো ও সংরক্ষণ</h3>
+        <p>তরল বিষ ফ্রিজ-ড্রাই করে গুঁড়ো আকারে রূপান্তর করা হয়। এই অবস্থায় এটি দীর্ঘদিন অকেজো না হয়ে সংরক্ষিত থাকে এবং প্রয়োজনে দ্রবীভূত করা যায়।</p>
+      </div>
+    </div>
 
-    <script>
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+    <div class="step">
+      <div class="fig"><img src="img/step3-horse.jpg" alt="ঘোড়ার শরীরে টিকাকরণ"></div>
+      <div class="step-text">
+        <span class="tag">ধাপ ৩</span>
+        <h3>প্রাণীতে ধীরে ধীরে ইনজেকশন</h3>
+        <p>ঘোড়া বা ভেড়ার শরীরে অত্যন্ত কম মাত্রায় বিষ প্রবেশ করানো হয়। কয়েক সপ্তাহ ধরে ধীরে ধীরে মাত্রা বাড়ানো হয়, যাতে প্রাণীটি অসুস্থ না হয়ে বরং প্রতিরোধ ক্ষমতা গড়ে তোলে।</p>
+      </div>
+    </div>
 
-        // Add animation on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
-                }
-            });
-        });
+    <div class="step">
+      <div class="fig"><img src="img/step4-bloodbag.jpg" alt="রক্ত সংগ্রহ"></div>
+      <div class="step-text">
+        <span class="tag">ধাপ ৪</span>
+        <h3>রক্ত সংগ্রহ</h3>
+        <p>যখন রক্তে পর্যাপ্ত অ্যান্টিবডি তৈরি হয়, তখন প্রাণীর শরীর থেকে নিরাপদভাবে রক্ত সংগ্রহ করা হয় — ঠিক যেভাবে মানুষ রক্তদান করেন।</p>
+      </div>
+    </div>
 
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        `;
-        document.head.appendChild(style);
+    <div class="step">
+      <div class="fig"><img src="img/step5-lab.jpg" alt="ল্যাবরেটরিতে সিরাম পরিশোধন"></div>
+      <div class="step-text">
+        <span class="tag">ধাপ ৫</span>
+        <h3>পরিশোধন</h3>
+        <p>রক্ত থেকে শুধু অ্যান্টিবডি অংশটুকু আলাদা করে বিশুদ্ধ করা হয়, বাকি অংশ ফেলে দেওয়া হয়। এই বিশুদ্ধকরণ ধাপটি ওষুধকে নিরাপদ করে তোলে।</p>
+      </div>
+    </div>
 
-        document.querySelectorAll('.step-card, .timeline-item, .info-box').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+    <div class="step">
+      <div class="fig"><img src="img/step6-final-vial.jpg" alt="প্রস্তুতকৃত অ্যান্টিভেনম ভায়াল"></div>
+      <div class="step-text">
+        <span class="tag">ধাপ ৬</span>
+        <h3>চূড়ান্ত ওষুধ</h3>
+        <p>বিশুদ্ধ অ্যান্টিবডি একটি তরল দ্রবণে পরিণত করে ভায়ালে ভরা হয়। এখন এটি হাসপাতালে পাঠানোর জন্য প্রস্তুত।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="antibody">
+  <div class="section-head">
+    <span class="section-num">০২</span>
+    <h2>অ্যান্টিবডি বিষকে কীভাবে থামায়</h2>
+  </div>
+  <p class="lede">নিচের ধাপগুলোতে ক্লিক করে দেখুন কোষ পর্যায়ে আসলে কী ঘটে।</p>
+
+  <div class="lab">
+    <div class="lab-controls">
+      <button class="lab-btn active" data-stage="0">১. বিষ প্রবেশ</button>
+      <button class="lab-btn" data-stage="1">২. চেনা</button>
+      <button class="lab-btn" data-stage="2">৩. অ্যান্টিবডি তৈরি</button>
+      <button class="lab-btn" data-stage="3">৪. নিরপেক্ষকরণ</button>
+    </div>
+    <div class="stage" id="stage"></div>
+    <p class="lab-caption" id="labCaption">বিষের অণুগুলো (সবুজ) রক্তপ্রবাহে প্রবেশ করেছে।</p>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="section-head">
+    <span class="section-num">০৩</span>
+    <h2>একটি ব্যাচ তৈরির সময়রেখা</h2>
+  </div>
+  <p class="lede">একটি প্রাণী থেকে ব্যবহারযোগ্য অ্যান্টিভেনম পেতে প্রায় তিন মাস সময় লাগে।</p>
+
+  <div class="tl">
+    <div class="tl-row">
+      <div class="tl-when">দিন ১</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-stem"></div></div>
+      <div class="tl-body">
+        <h4>প্রাথমিক ইনজেকশন</h4>
+        <p>অত্যন্ত কম মাত্রার বিষ প্রথমবার প্রাণীর শরীরে প্রবেশ করানো হয়।</p>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-when">সপ্তাহ ২–৬</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-stem"></div></div>
+      <div class="tl-body">
+        <h4>বুস্টার ডোজ</h4>
+        <p>নিয়মিত বিরতিতে ধীরে ধীরে বাড়তি মাত্রার বিষ দেওয়া হয়, প্রতিবার রক্ত পরীক্ষা করে অগ্রগতি যাচাই করা হয়।</p>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-when">সপ্তাহ ৮</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-stem"></div></div>
+      <div class="tl-body">
+        <h4>অ্যান্টিবডি নিশ্চিতকরণ</h4>
+        <p>রক্তে পর্যাপ্ত অ্যান্টিবডি আছে কিনা পরীক্ষাগারে নিশ্চিত করা হয়।</p>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-when">সপ্তাহ ১০</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-stem"></div></div>
+      <div class="tl-body">
+        <h4>রক্ত সংগ্রহ</h4>
+        <p>নিয়ন্ত্রিতভাবে রক্ত সংগ্রহ করা হয়, প্রাণীকে সুস্থ রেখেই।</p>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-when">সপ্তাহ ১১–১২</div>
+      <div class="tl-line"><div class="tl-dot"></div></div>
+      <div class="tl-body">
+        <h4>পরিশোধন ও প্যাকেজিং</h4>
+        <p>চূড়ান্ত পরীক্ষার পর ওষুধ হাসপাতালে পাঠানোর জন্য প্রস্তুত করা হয়।</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="future">
+  <div class="section-head">
+    <span class="section-num">০৪</span>
+    <h2>পুরনো পদ্ধতি বনাম নতুন গবেষণা</h2>
+  </div>
+
+  <div class="compare">
+    <div>
+      <div class="fig"><img src="img/compare-traditional.jpg" alt="প্রচলিত পদ্ধতিতে প্রাণী ব্যবহার করে অ্যান্টিভেনম তৈরি"></div>
+      <div class="compare-cap">
+        <h4>প্রচলিত পদ্ধতি</h4>
+        <p>ঘোড়া বা ভেড়ার শরীর ব্যবহার করে অ্যান্টিবডি তৈরি — সময়সাপেক্ষ কিন্তু আজও সবচেয়ে ব্যবহৃত পদ্ধতি।</p>
+      </div>
+    </div>
+    <div>
+      <div class="fig"><img src="img/compare-lab.jpg" alt="ল্যাবরেটরিতে জিন প্রযুক্তি ব্যবহার করে অ্যান্টিবডি তৈরি"></div>
+      <div class="compare-cap">
+        <h4>নতুন গবেষণা</h4>
+        <p>জিন প্রযুক্তি ব্যবহার করে ল্যাবেই অ্যান্টিবডি তৈরির চেষ্টা চলছে — দ্রুত এবং প্রাণী-নির্ভরতাহীন।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="future-grid" style="margin-top: 3rem;">
+    <div class="future-card">
+      <span class="icon">🧬</span>
+      <h4>রিকম্বিন্যান্ট অ্যান্টিবডি</h4>
+      <p>জীবাণু বা কোষ ব্যবহার করে ল্যাবরেটরিতে সরাসরি অ্যান্টিবডি উৎপাদন।</p>
+    </div>
+    <div class="future-card">
+      <span class="icon">🌐</span>
+      <h4>সর্বজনীন অ্যান্টিভেনম</h4>
+      <p>একাধিক প্রজাতির সাপের বিষের বিরুদ্ধে কার্যকর একটি একক ওষুধ তৈরির গবেষণা।</p>
+    </div>
+    <div class="future-card">
+      <span class="icon">🖥️</span>
+      <h4>কম্পিউটেশনাল ডিজাইন</h4>
+      <p>বিষের আণবিক গঠন বিশ্লেষণ করে কৃত্রিম বুদ্ধিমত্তার মাধ্যমে অ্যান্টিবডি নকশা।</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>এই পাতাটি শিক্ষামূলক উদ্দেশ্যে তৈরি — ইমিউনোলজি ও অ্যান্টিভেনম উৎপাদন প্রক্রিয়া সম্পর্কে সহজবোধ্য পরিচিতি।</p>
+</footer>
+
+<script>
+  // scroll progress rail
+  const rail = document.getElementById('rail');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    rail.style.width = pct + '%';
+  });
+
+  // interactive antibody stage
+  const stageEl = document.getElementById('stage');
+  const captionEl = document.getElementById('labCaption');
+  const buttons = document.querySelectorAll('.lab-btn');
+
+  const captions = [
+    'বিষের অণুগুলো (সবুজ) রক্তপ্রবাহে প্রবেশ করেছে।',
+    'রোগ প্রতিরোধ ব্যবস্থার কোষগুলো বিষকে বিদেশী পদার্থ হিসেবে শনাক্ত করছে।',
+    'বি-কোষ বিষের গঠন অনুযায়ী নির্দিষ্ট অ্যান্টিবডি (কমলা) তৈরি করছে।',
+    'অ্যান্টিবডি বিষের সাথে যুক্ত হয়ে তাকে নিষ্ক্রিয় করে দিচ্ছে।'
+  ];
+
+  function renderStage(n){
+    stageEl.innerHTML = '';
+    const w = stageEl.clientWidth, h = stageEl.clientHeight;
+
+    function addMolecule(x, y, size, color, glow){
+      const d = document.createElement('div');
+      d.className = 'molecule';
+      d.style.width = size + 'px';
+      d.style.height = size + 'px';
+      d.style.left = x + 'px';
+      d.style.top = y + 'px';
+      d.style.background = color;
+      if(glow) d.style.boxShadow = '0 0 16px ' + color;
+      stageEl.appendChild(d);
+      return d;
+    }
+
+    const venomPositions = [[0.2,0.3],[0.35,0.6],[0.5,0.25],[0.65,0.55],[0.8,0.35]];
+
+    if(n === 0){
+      venomPositions.forEach(([px,py]) => {
+        addMolecule(px*w, py*h, 22, '#7cf29c', true);
+      });
+    }
+    if(n === 1){
+      venomPositions.forEach(([px,py], i) => {
+        addMolecule(px*w, py*h, 22, '#7cf29c', true);
+        if(i % 2 === 0){
+          addMolecule(px*w - 10, py*h - 30, 14, '#ffe38a', false);
+        }
+      });
+    }
+    if(n === 2){
+      venomPositions.forEach(([px,py]) => {
+        addMolecule(px*w, py*h, 22, '#7cf29c', true);
+      });
+      // antibodies forming
+      [[0.25,0.15],[0.45,0.75],[0.7,0.15],[0.85,0.65]].forEach(([px,py]) => {
+        addMolecule(px*w, py*h, 18, '#ffb454', true);
+      });
+    }
+    if(n === 3){
+      // paired venom+antibody, dimmed venom
+      venomPositions.forEach(([px,py]) => {
+        const v = addMolecule(px*w, py*h, 22, '#3a5c47', false);
+        const a = addMolecule(px*w + 14, py*h - 6, 16, '#ffb454', true);
+      });
+    }
+
+    captionEl.textContent = captions[n];
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderStage(parseInt(btn.dataset.stage));
+    });
+  });
+
+  renderStage(0);
+  window.addEventListener('resize', () => {
+    const active = document.querySelector('.lab-btn.active');
+    renderStage(parseInt(active.dataset.stage));
+  });
+</script>
+
 </body>
 </html>
